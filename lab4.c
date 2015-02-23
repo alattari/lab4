@@ -30,6 +30,11 @@ double median(int num, ...);
 int mode(int num, ...);
 
 double median(int num, ...) {
+    va_list myList;
+    va_start (myList, n_args);
+//    int array [n_args];
+    
+
   /* This function definition is obviously incorrect and needs to be
      replaced. */
   return 0;
