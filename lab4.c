@@ -5,8 +5,8 @@
 
   Lab 4: variable arguments
 
-  Authors: Kevin Wortman (kwortman@csu.fullerton.edu) (REPLACE THIS
-  WITH YOUR NAMES AND CSUF EMAIL ADDRESSES)
+  Authors: Kevin Wortman (kwortman@csu.fullerton.edu)
+           Victor Pires (victor.pires@csu.fullerton.edu)
 
 */ 
 
@@ -30,10 +30,37 @@ double median(int num, ...);
 int mode(int num, ...);
 
 double median(int num, ...) {
+    /* TODO
+     * Print the array before sorting
+     * Print the array after sorting
+     */
+    int array [num];
+    int x, y, temp;
     va_list myList;
-    va_start (myList, n_args);
-//    int array [n_args];
+    va_start (myList, num);
+    for (x = 0; x < num; x++)
+        array[x] = va_arg (myList, int);
+    printf ("[");
+    for (x = 0; x < (num-1); x++)
+        printf ("%d, ", array[x]);
+    /* Bubble sort */
+    for(int x=0; x<n; x++) {
+        for(int y=0; y<n-1; y++) {
+            if(array[y]>array[y+1]) {
+                int temp = array[y+1];
+                array[y+1] = array[y];
+                array[y] = temp;
+            }
+        }
+    }
     
+    va_end (myList); 
+
+
+
+
+
+
 
   /* This function definition is obviously incorrect and needs to be
      replaced. */
