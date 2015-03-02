@@ -43,25 +43,21 @@ double median(int num, ...) {
     printf ("[");
     for (x = 0; x < (num-1); x++)
         printf ("%d, ", array[x]);
+    printf ("%d]", array[x]);
     /* Bubble sort */
-    for(int x=0; x<n; x++) {
-        for(int y=0; y<n-1; y++) {
-            if(array[y]>array[y+1]) {
-                int temp = array[y+1];
-                array[y+1] = array[y];
+    for(int x = 0; x < num; x++) {
+        for(int y = 0; y < (num - 1); y++) {
+            if(array[y] > array[y + 1]) {
+                int temp = array[y + 1];
+                array[y + 1] = array[y];
                 array[y] = temp;
             }
         }
     }
-    
+    for (x = 0; x < (num-1); x++)
+        printf ("%d, ", array[x]);
+    printf ("%d]", array[x]);
     va_end (myList); 
-
-
-
-
-
-
-
   /* This function definition is obviously incorrect and needs to be
      replaced. */
   return 0;
