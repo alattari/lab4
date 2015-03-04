@@ -60,7 +60,7 @@ int mode(int num, ...) {
     int array [num];
     int x, y, temp;
     int mod;
-    int count = 1, countMax = 1, pos = 0;
+    int aux = 1, auxMax = 1, pos = 0;
     va_list myList;
     va_start (myList, num);
     for (x = 0; x < num; x++)
@@ -80,20 +80,19 @@ int mode(int num, ...) {
         }
     }
 
-    printf ("[");
     for (x = 0; x < (num); x++){
         if(array[x] != array[x + 1])
         {
-            countMax = count;
-            count = 1;
+            auxMax = aux;
+            aux = 1;
         }
-        if(countMax > count)
+        else if(aux > auxMax)
         {
             pos = x;
         }
 
         else{
-            count++;
+            aux++;
         }
     }
 
