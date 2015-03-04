@@ -5,7 +5,7 @@
 
   Lab 4: variable arguments
 
-  Authors: Kevin Wortman (kwortman@csu.fullerton.edu)
+  Authors: Alexandre Lattari (alattari@csu.fullerton.edu)
            Victor Pires (victor.pires@csu.fullerton.edu)
 
 */ 
@@ -19,15 +19,6 @@
    case of an even number of arguments, you need to take the mean of
    the two arguments closest to the middle, which is why the return
    type is double. */
-double median(int num, ...);
-
-/* num is the number of variable arguments, all of type int. Compute
-   and return the mode of the variable arguments. Recall that the mode
-   is the most frequently-ocurring value. If there are multiple values
-   tied for the same number of occurences, return the lesser of the
-   tied values.
- */
-int mode(int num, ...);
 
 double median(int num, ...) {
     /* TODO
@@ -58,14 +49,26 @@ double median(int num, ...) {
         printf ("%d, ", array[x]);
     printf ("%d]", array[x]);
     va_end (myList); 
-  /* This function definition is obviously incorrect and needs to be
-     replaced. */
   return 0;
 }
 
-int mode(int num, ...) {
-  /* This function definition is obviously incorrect and needs to be
-     replaced. */
+int mode(int num[], int total){
+    int i, j, aux, max, value;
+    
+    for(i=0; i < total; i++){
+        aux[num[i]]++;
+    }
+    max = 0;
+    value = 0;
+    for(j=0; j<total; j++){
+        if(aux[j] > max){
+            max = aux[j];
+            value = j;
+        }
+    }
+    return value;
+}
+
   return 0;
 }
 
