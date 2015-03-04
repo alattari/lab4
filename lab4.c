@@ -2,13 +2,10 @@
   CPSC 223C
   Spring 2015
   CSU Fullerton
-
   Lab 4: variable arguments
-
-  Authors: Alexandre Lattari (alattari@csu.fullerton.edu)
+  Authors: Kevin Wortman (kwortman@csu.fullerton.edu)
            Victor Pires (victor.pires@csu.fullerton.edu)
-
-*/ 
+*/
 
 #include <assert.h>
 #include <stdio.h>
@@ -19,25 +16,26 @@
    case of an even number of arguments, you need to take the mean of
    the two arguments closest to the middle, which is why the return
    type is double. */
+double median(int num, ...);
+
+/* num is the number of variable arguments, all of type int. Compute
+   and return the mode of the variable arguments. Recall that the mode
+   is the most frequently-ocurring value. If there are multiple values
+   tied for the same number of occurences, return the lesser of the
+   tied values.
+ */
+int mode(int num, ...);
 
 double median(int num, ...) {
-    /* TODO
-     * Print the array before sorting
-     * Print the array after sorting
-     */
     int array [num];
     int x, y, temp;
+    double med;
     va_list myList;
     va_start (myList, num);
     for (x = 0; x < num; x++)
         array[x] = va_arg (myList, int);
-    printf ("[");
-    for (x = 0; x < (num-1); x++)
-        printf ("%d, ", array[x]);
-    printf ("%d]", array[x]);
-    /* Bubble sort */
-    for(int x = 0; x < num; x++) {
-        for(int y = 0; y < (num - 1); y++) {
+    for(x = 0; x < num; x++) {
+        for(y = 0; y < (num - 1); y++) {
             if(array[y] > array[y + 1]) {
                 int temp = array[y + 1];
                 array[y + 1] = array[y];
@@ -45,31 +43,62 @@ double median(int num, ...) {
             }
         }
     }
-    for (x = 0; x < (num-1); x++)
-        printf ("%d, ", array[x]);
-    printf ("%d]", array[x]);
-    va_end (myList); 
-  return 0;
-}
-
-int mode(int num[], int total){
-    int i, j, aux, max, value;
-    
-    for(i=0; i < total; i++){
-        aux[num[i]]++;
-    }
-    max = 0;
-    value = 0;
-    for(j=0; j<total; j++){
-        if(aux[j] > max){
-            max = aux[j];
-            value = j;
+    if (!(num%2)) {
+        med = ((array[(num / 2) - 1] + array[(num / 2)]) / 2.0);
+    } else {
+        if (num == 1) {
+            med = array[0];
+        } else {
+            med = array[(num/2)];
         }
     }
-    return value;
+    va_end (myList);
+    return(med);
 }
 
-  return 0;
+int mode(int num, ...) {
+    int array [num];
+    int x, y, temp;
+    int mod;
+    int count = 1, countMax = 1, pos = 0;
+    va_list myList;
+    va_start (myList, num);
+    for (x = 0; x < num; x++)
+        array[x] = va_arg (myList, int);
+    printf("[");
+    for (x = 0; x < (num-1); x++)
+        printf("%d, ", array[x]);
+    printf("%d]\n", array[x]);
+    /* Bubble sort */
+    for ( x = 0; x < num; x++) {
+        for ( y = 0; y < (num - 1); y++) {
+            if(array[y] > array[y + 1]) {
+                int temp = array[y + 1];
+                array[y + 1] = array[y];
+                array[y] = temp;
+            }
+        }
+    }
+
+    printf ("[");
+    for (x = 0; x < (num); x++){
+        if(array[x] != array[x + 1])
+        {
+            countMax = count;
+            count = 1;
+        }
+        if(countMax > count)
+        {
+            pos = x;
+        }
+
+        else{
+            count++;
+        }
+    }
+
+    va_end (myList);
+    return(array[pos]);
 }
 
 int main() {
@@ -93,8 +122,12 @@ int main() {
 
   /* TODO: you should add at least two more test cases for your
      median() function here. */
+  assert(median(1, 7) == 7);
+  assert(median(7, 1, 1, 1, 1, 1, 1, 1) == 1);
 
+    printf ("Median done!\n");//<<<<<<<<<<<<<<<<<<<
   /* MODE */
+  mode(1, 1);
 
   /* straightforward cases */
   assert(mode(1, 1) == 1);
@@ -108,5 +141,6 @@ int main() {
   /* TODO: you should add at least two more test cases for your mode()
      function here. */
 
-  return 0;
+  printf ("Mode done!\n");//<<<<<<<<<<<<<<<<<<<
+  return(0);
 }
